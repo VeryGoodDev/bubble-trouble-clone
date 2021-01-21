@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bubble Trouble Clone</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      align-items: center;
+      background-color: #0a0a0a;
+      display: grid;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    #screen {
+      border: 1px solid orange;
+      display: block;
+      height: 56.25vw;
+      margin: 0 auto;
+      max-height: calc(100vh - 1px);
+      max-width: 177.7vh;
+    }
+  </style>
+</head>
+<body>
+  <!-- <p>Something about how this is a clone and not an original work</p> -->
+  <canvas id="screen" width="1920" height="1080"></canvas>
+</body>
+</html>
