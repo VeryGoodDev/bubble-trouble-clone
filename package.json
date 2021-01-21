@@ -1,0 +1,25 @@
+{
+  "name": "bubble-trouble-clone",
+  "version": "0.1.0",
+  "description": "A JavaScript clone of Bubble Trouble, a Flash game that I enjoyed playing growing up",
+  "main": "index.html",
+  "repository": "https://github.com/verygooddev/bubble-trouble-clone",
+  "author": "VeryGoodDev <very_good_dev@outlook.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "serve --listen 9000 ./"
+  },
+  "dependencies": {
+    "eslint": "^6",
+    "serve": "^11.3.2"
+  },
+  "devDependencies": {
+    "eslint-config-personal": "github:verygooddev/eslint-config-personal"
+  },
+  "eslintConfig": {
+    "extends": [
+      "personal"
+    ]
+  }
+}
