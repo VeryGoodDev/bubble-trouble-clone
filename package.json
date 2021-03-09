@@ -20,6 +20,17 @@
   "eslintConfig": {
     "extends": [
       "personal"
+    ],
+    "rules": {
+      "import/extensions": "off"
+    },
+    "overrides": [
+      {
+        "files": ["**/*.d.ts"],
+        "rules": {
+          "prettier/prettier": "off"
+        }
+      }
     ]
   }
 }
