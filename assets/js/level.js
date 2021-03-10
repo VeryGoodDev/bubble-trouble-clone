@@ -4,26 +4,36 @@
 
 import Composer from './composer.js'
 import BackgroundLayer from './layers/background.js'
+import CeilingFloorLayer from './layers/CeilingFloor.js'
 import { getJson } from './util.js'
 
-const BACKGROUND_WIDTH = 1920
-const BACKGROUND_HEIGHT = 1080
+const SCREEN_WIDTH = 1920
+const SCREEN_HEIGHT = 1080
 
 export default class Level {
   /**
    * @param {LevelSpec} levelSpec Specifications for the level
    */
   constructor(levelSpec) {
-    const layers = []
-    const backgroundLayer = new BackgroundLayer(levelSpec.backgroundImage, BACKGROUND_WIDTH, BACKGROUND_HEIGHT)
-    layers.push(backgroundLayer)
+    const layers = [
+      new BackgroundLayer(levelSpec.backgroundImage, SCREEN_WIDTH, SCREEN_HEIGHT),
+      new CeilingFloorLayer(levelSpec, SCREEN_WIDTH, SCREEN_HEIGHT),
+      // TODO: Wall layer
+      // TODO: Players layer
+      // TODO: Bubbles layer
+      // TODO: Powerup layer
+    ]
     this.composer = new Composer(layers)
   }
   /**
    * @param {CanvasRenderingContext2D} context Context to draw on
    */
   draw(context) {
+    // context.clearRect(0, 0, context.canvas.width, context.canvas.height)
     this.composer.draw(context)
+  }
+  update() {
+    this.composer.update()
   }
 }
 /**
