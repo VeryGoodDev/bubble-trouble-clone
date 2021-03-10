@@ -11,7 +11,7 @@ export function getImage(url) {
     img.onerror = function onError() {
       reject(new Error(`Something went wrong loading the image`))
     }
-    img.src = url
+    img.src = fixUrl(url)
   })
 }
 /**
@@ -19,5 +19,15 @@ export function getImage(url) {
  * @returns {Promise}
  */
 export function getJson(url) {
-  return fetch(url).then(res => res.json())
+  return fetch(fixUrl(url)).then(res => res.json())
+}
+
+// Internal helpers, not exported
+function fixUrl(url) {
+  try {
+    return new URL(url, window.location.href).href
+  } catch (err) {
+    console.error(`Error trying to fix ${url}:`, err)
+    return url
+  }
 }
