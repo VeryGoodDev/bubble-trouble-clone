@@ -10,6 +10,7 @@ async function main(canvas) {
   requestAnimationFrame(gameLoop)
   function gameLoop() {
     context.clearRect(0, 0, canvas.width, canvas.height)
+    level.update()
     level.draw(context)
 
     // Last action always needs to request a new animation frame

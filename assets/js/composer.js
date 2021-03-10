@@ -1,5 +1,5 @@
 /**
- * @typedef { import('./types').Layer } Layer
+ * @typedef { import('./layers/Layer').default } Layer
  */
 
 export default class Composer {
@@ -15,6 +15,11 @@ export default class Composer {
   draw(context) {
     this.layers.forEach(layer => {
       layer.draw(context)
+    })
+  }
+  update() {
+    this.layers.forEach(layer => {
+      layer.update?.()
     })
   }
 }
