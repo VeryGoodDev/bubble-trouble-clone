@@ -78,10 +78,10 @@ export default class CeilingFloorLayer extends Layer {
  * @param {number} width Width of the spike strip
  * @returns HTMLCanvasElement
  */
-// TODO: 115 spikes
+// TODO: [ENHANCEMENT] Add different visual styles (tweak width/height/x movement accordingly)
 function getSpikes(width) {
-  const spikeWidth = width / SPIKE_COUNT
-  const spikeHeight = Math.sqrt(spikeWidth ** 2 - (spikeWidth / 2) ** 2)
+  const spikeWidth = (width / SPIKE_COUNT) * 0.75
+  const spikeHeight = Math.sqrt(spikeWidth ** 2 - (spikeWidth / 2) ** 2) * 1.125
   const canvas = document.createElement(`canvas`)
   canvas.width = width
   canvas.height = spikeHeight
@@ -94,7 +94,7 @@ function getSpikes(width) {
     context.lineTo(x + spikeWidth / 2, spikeHeight)
     context.lineTo(x + spikeWidth, 0)
     context.fill()
-    x += spikeWidth
+    x += spikeWidth * (4 / 3)
   }
   return canvas
 }
