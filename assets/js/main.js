@@ -5,7 +5,7 @@ import Level, { loadLevel } from './level.js'
  */
 async function main(canvas) {
   const context = canvas.getContext(`2d`)
-  const levelSpec = await loadLevel(`/assets/levels/1.json`)
+  const levelSpec = await loadLevel(`./assets/levels/1.json`)
   const level = new Level(levelSpec)
   requestAnimationFrame(gameLoop)
   function gameLoop() {
