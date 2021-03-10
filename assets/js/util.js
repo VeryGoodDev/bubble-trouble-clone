@@ -23,6 +23,10 @@ export function getJson(url) {
 }
 
 // Internal helpers, not exported
+/**
+ * @param {string} url The URL to be adjusted for the current location
+ * @returns string The URL relative to the current location
+ */
 function fixUrl(url) {
   try {
     return new URL(url, window.location.href).href
