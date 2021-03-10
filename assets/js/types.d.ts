@@ -29,9 +29,3 @@ export type LevelSpec = {
   name: string,
   timeLimit: number,
 }
-export class Layer {
-  // eslint-disable-next-line no-unused-vars
-  draw(context: CanvasRenderingContext2D) {
-    console.error(`Implement a draw method for your layer`)
-  }
-}
