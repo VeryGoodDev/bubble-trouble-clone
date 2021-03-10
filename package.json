@@ -11,7 +11,7 @@
     "start": "serve --listen 9000 ./"
   },
   "dependencies": {
-    "eslint": "^6",
+    "eslint": "^7",
     "serve": "^11.3.2"
   },
   "devDependencies": {
@@ -24,7 +24,8 @@
     "rules": {
       "import/extensions": "off",
       "class-methods-use-this": "off",
-      "lines-between-class-members": "off"
+      "lines-between-class-members": "off",
+      "max-classes-per-file": "off"
     },
     "overrides": [
       {
