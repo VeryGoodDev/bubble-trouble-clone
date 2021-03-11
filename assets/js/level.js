@@ -3,7 +3,7 @@
  */
 
 import Composer from './composer.js'
-import BackgroundLayer from './layers/background.js'
+import BackgroundLayer from './layers/BackgroundLayer.js'
 import CeilingFloorLayer from './layers/CeilingFloor.js'
 import { getJson } from './util.js'
 
