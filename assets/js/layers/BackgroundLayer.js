@@ -1,9 +1,6 @@
 import { getImage } from '../util.js'
 import Layer from './Layer.js'
 
-/**
- * @extends Layer
- */
 export default class BackgroundLayer extends Layer {
   constructor(imgUrl, width, height) {
     super(width, height)
