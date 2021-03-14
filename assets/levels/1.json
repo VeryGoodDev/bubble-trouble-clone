@@ -1,6 +1,14 @@
 {
   "backgroundImage": "./assets/img/backgrounds/levels/1.jpg",
-  "bubbles": [],
+  "bubbles": [
+    {
+      "color": "yellow",
+      "initialPosition": "midleft",
+      "initialVelocity": "right",
+      "size": 2,
+      "splitTrajectories": "normal"
+    }
+  ],
   "levelNumber": 1,
   "name": "Warm Up",
   "timeLimit": 40
