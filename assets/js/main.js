@@ -8,9 +8,10 @@ async function main(canvas) {
   const levelSpec = await loadLevel(`./assets/levels/1.json`)
   const level = new Level(levelSpec)
   requestAnimationFrame(gameLoop)
-  function gameLoop() {
+  function gameLoop(time) {
+    // console.log(`time:`, time)
     context.clearRect(0, 0, canvas.width, canvas.height)
-    level.update()
+    level.update(time)
     level.draw(context)
 
     // Last action always needs to request a new animation frame

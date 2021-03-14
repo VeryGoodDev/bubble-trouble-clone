@@ -5,6 +5,7 @@
 import Composer from './composer.js'
 import BackgroundLayer from './layers/BackgroundLayer.js'
 import CeilingFloorLayer from './layers/CeilingFloor.js'
+import WallLayer from './layers/WallLayer.js'
 import { getJson } from './util.js'
 
 const SCREEN_WIDTH = 1920
@@ -18,7 +19,7 @@ export default class Level {
     const layers = [
       new BackgroundLayer(levelSpec.backgroundImage, SCREEN_WIDTH, SCREEN_HEIGHT),
       new CeilingFloorLayer(levelSpec, SCREEN_WIDTH, SCREEN_HEIGHT),
-      // TODO: Wall layer
+      new WallLayer(levelSpec.walls || [], SCREEN_WIDTH, SCREEN_HEIGHT),
       // TODO: Players layer
       // TODO: Bubbles layer
       // TODO: Powerup layer
@@ -32,8 +33,8 @@ export default class Level {
     // context.clearRect(0, 0, context.canvas.width, context.canvas.height)
     this.composer.draw(context)
   }
-  update() {
-    this.composer.update()
+  update(time) {
+    this.composer.update(time)
   }
 }
 /**

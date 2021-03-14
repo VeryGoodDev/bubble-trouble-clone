@@ -17,9 +17,9 @@ export default class Composer {
       layer.draw(context)
     })
   }
-  update() {
+  update(...args) {
     this.layers.forEach(layer => {
-      layer.update?.()
+      layer.update?.(...args)
     })
   }
 }
