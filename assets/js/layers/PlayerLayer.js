@@ -21,7 +21,6 @@ export class Player {
   update() {
     if (this.velocity) {
       this.x = clamp(this.x + this.velocity, this.minX, this.maxX)
-      console.log(this.x)
     }
   }
 }
