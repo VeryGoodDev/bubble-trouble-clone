@@ -4,7 +4,7 @@ import Layer from './Layer.js'
  * @typedef { import('../types').WallSpec } WallSpec
  */
 
-const WALL_OPENING_VELOCITY = 44
+const WALL_OPENING_VELOCITY = 40
 const WALL_WIDTH = 1920 / 17
 
 class Wall {
