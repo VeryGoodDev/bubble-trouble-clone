@@ -1,4 +1,4 @@
-import { positionPresets, splitTypePresets, velocityPresets } from '../constants.js'
+import { gravityPresets, positionPresets, splitTypePresets, velocityPresets } from '../constants.js'
 import Layer from './Layer.js'
 
 /**
@@ -79,7 +79,8 @@ class Bubble {
     this.id = index
     this.color = bubbleSpec.color
     this.size = bubbleSpec.size
-    this.velocity = getVelocity(bubbleSpec.initialVelocity)
+    this.bounceTime = null
+    this.velocity = [getVelocity(bubbleSpec.initialVelocity), gravityPresets.NORMAL]
     this.splitTrajectories = getSplitTrajectories(bubbleSpec.splitTrajectories)
     this.radius = getRadius(this.size, levelWidth)
     this.position = getPosition(bubbleSpec.initialPosition, levelWidth, this.radius * 2)
@@ -94,12 +95,20 @@ class Bubble {
     context.arc(x, y, this.radius, 0, 2 * Math.PI)
     context.fill()
   }
-  update(levelWidth) {
+  update(time, levelWidth, levelHeight) {
     const [x, y] = this.position
     if (x - this.radius <= 0 || x + this.radius >= levelWidth) {
-      this.velocity = -this.velocity
+      this.velocity[0] = -this.velocity[0]
     }
-    this.position = [x + this.velocity, y]
+    if (!this.bounceTime && y + this.radius >= levelHeight) {
+      this.bounceTime = time
+      this.velocity[1] = -this.velocity[1]
+    } else if (this.bounceTime && time - this.bounceTime > 3000) {
+      this.bounceTime = null
+      this.velocity[1] = -this.velocity[1]
+    }
+    const [dx, dy] = this.velocity
+    this.position = [x + dx, y + dy]
   }
 }
 
@@ -123,9 +132,9 @@ export default class BubbleLayer extends Layer {
     })
     super.draw(context)
   }
-  update() {
+  update(time) {
     this.bubbles.forEach(bubble => {
-      bubble.update(this.width)
+      bubble.update(time, this.width, this.height)
     })
   }
 }
