@@ -2,6 +2,11 @@ import { getImage } from '../util.js'
 import Layer from './Layer.js'
 
 export default class BackgroundLayer extends Layer {
+  /**
+   * @param {string} imgUrl URL for the background image
+   * @param {number} width Width of the level
+   * @param {number} height Height of the level
+   */
   constructor(imgUrl, width, height) {
     super(width, height)
     // TODO: Error handling maybe?
