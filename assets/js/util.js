@@ -1,3 +1,6 @@
+export function clamp(num, min, max) {
+  return Math.min(max, Math.max(min, num))
+}
 /**
  * @param {string} url URL of the image
  * @returns {Promise<HTMLImageElement>}
