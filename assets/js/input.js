@@ -2,7 +2,7 @@
  * @typedef { import('./layers/PlayerLayer').Player } Player
  */
 
-const PLAYER_VELOCITY = 5.5
+const PLAYER_VELOCITY = 5.75
 
 /**
  * @param {Player} player The player which the input should affect

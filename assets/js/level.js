@@ -5,6 +5,7 @@
 import Composer from './composer.js'
 import { setupKeyboard } from './input.js'
 import BackgroundLayer from './layers/BackgroundLayer.js'
+import BubbleLayer from './layers/BubbleLayer.js'
 import CeilingFloorLayer from './layers/CeilingFloor.js'
 import PlayerLayer, { Player } from './layers/PlayerLayer.js'
 import WallLayer from './layers/WallLayer.js'
@@ -24,7 +25,7 @@ export default class Level {
       new CeilingFloorLayer(levelSpec, SCREEN_WIDTH, SCREEN_HEIGHT),
       new WallLayer(levelSpec.walls || [], SCREEN_WIDTH, SCREEN_HEIGHT),
       new PlayerLayer(player, SCREEN_WIDTH, SCREEN_HEIGHT),
-      // TODO: Bubbles layer
+      new BubbleLayer(levelSpec, SCREEN_WIDTH, SCREEN_HEIGHT),
       // TODO: Powerup layer
     ]
     this.composer = new Composer(layers)

@@ -2,11 +2,11 @@
   "backgroundImage": "./assets/img/backgrounds/levels/1.jpg",
   "bubbles": [
     {
-      "color": "yellow",
-      "initialPosition": "midleft",
-      "initialVelocity": "right",
+      "color": "YELLOW",
+      "initialPosition": ["MIDLEFT", 800],
+      "initialVelocity": "RIGHT",
       "size": 2,
-      "splitTrajectories": "normal"
+      "splitTrajectories": "NORMAL"
     }
   ],
   "levelNumber": 1,

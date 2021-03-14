@@ -1,34 +1,37 @@
 // BubbleSpec type helpers
-type BubbleColor = `red` | `orange` | `yellow` | `green` | `blue` | `purple`
+export type BubbleColor = `RED` | `ORANGE` | `YELLOW` | `GREEN` | `BLUE` | `PURPLE`
 // TODO: Eventually define a pattern if possible?
-type BubbleId = string
-type PositionConstant = `left` | `midleft` | `center` | `midright` | `right`
-type VelocityConstant = `left` | `right` | `none`
-type SplitTypeConstant = `normal` | `triple`
-type Position = PositionConstant | number
-type Velocity = VelocityConstant | number
+export type BubbleId = string
+export type PositionConstant = `LEFT` | `MIDLEFT` | `CENTER` | `MIDRIGHT` | `RIGHT`
+export type PositionFunction = (() => number) | ((levelWidth: number, bubbleWidth: number) => number)
+export type VelocityConstant = `LEFT` | `RIGHT` | `NONE`
+export type SplitTypeConstant = `NORMAL` | `TRIPLE`
+export type Position = PositionConstant | number
+export type Velocity = VelocityConstant | number
 // LevelSpec type helpers
-type GravityConstant = `normal` | `low`
+export type GravityConstant = `NORMAL` | `LOW`
 // WallSpec type helpers
-type BubbleUnlock = {
+export type BubbleUnlock = {
   bubbleTarget: BubbleId,
   type: `bubble`,
 }
-type TimeUnlock = {
+export type TimeUnlock = {
   time: number,
   type: `time`,
 }
-type WallUnlock = BubbleUnlock | TimeUnlock
+export type WallUnlock = BubbleUnlock | TimeUnlock
 
-// Types for use around the game
+// Composite types
 export type BubbleSpec = {
   color: BubbleColor,
   // TODO: customBehavior
-  id: BubbleId,
-  initialPosition: string | [Position, Position],
+  initialPosition: [Position, Position],
   initialVelocity: Velocity,
   size: number,
   splitTrajectories: SplitTypeConstant | Velocity[],
+}
+export type BubbleType = BubbleSpec & {
+  id: string
 }
 export type LevelSpec = {
   backgroundImage: string,
