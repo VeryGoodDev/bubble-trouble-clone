@@ -10,7 +10,6 @@ export default class Layer {
   /**
    * @param {CanvasRenderingContext2D} context Context to draw on
    */
-  // eslint-disable-next-line no-unused-vars
   draw(context) {
     context.drawImage(this.canvas, 0, 0)
   }
