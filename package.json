@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "lint": "eslint assets/js/**/*.js",
     "start": "serve --listen 9000 ./"
   },
   "dependencies": {
@@ -23,7 +24,6 @@
     ],
     "rules": {
       "import/extensions": "off",
-      "class-methods-use-this": "off",
       "lines-between-class-members": "off",
       "max-classes-per-file": "off",
       "default-case": "off"

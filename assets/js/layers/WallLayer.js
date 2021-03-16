@@ -36,8 +36,9 @@ class Wall {
   /**
    * @param {CanvasRenderingContext2D} context Context to draw on
    */
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars, class-methods-use-this -- Disabled because this is intended to be extended and overriden
   draw(context) {}
+  // eslint-disable-next-line class-methods-use-this -- Disabled because this is intended to be extended and overriden
   update() {}
 }
 class RemovableWall extends Wall {

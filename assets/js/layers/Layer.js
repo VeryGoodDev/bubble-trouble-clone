@@ -13,5 +13,6 @@ export default class Layer {
   draw(context) {
     context.drawImage(this.canvas, 0, 0)
   }
+  // eslint-disable-next-line class-methods-use-this -- Disabled because this is intended to be empty unless overridden
   update() {}
 }
