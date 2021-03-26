@@ -71,7 +71,7 @@ function getRadius(bubbleSize, levelWidth) {
   return (levelWidth / divisor) * bubbleSize
 }
 function getBounceVelocity(bubbleSize, minBounce, maxBounce) {
-  return -clamp(bubbleSize * 1, minBounce, maxBounce)
+  return -clamp(bubbleSize * 10, minBounce, maxBounce)
 }
 
 class Bubble {
@@ -90,7 +90,7 @@ class Bubble {
       levelHeight - levelHeight / 9 - BUBBLE_BOUNCE_CLEARANCE,
       BUBBLE_BOUNCE_CLEARANCE
     )
-    this.velocity = [getVelocity(bubbleSpec.initialVelocity), gravityPresets.NORMAL]
+    this.velocity = [getVelocity(bubbleSpec.initialVelocity), -5]
     this.splitTrajectories = getSplitTrajectories(bubbleSpec.splitTrajectories)
     this.radius = getRadius(this.size, levelWidth)
     this.position = getPosition(bubbleSpec.initialPosition, levelWidth, this.radius * 2)
@@ -105,18 +105,19 @@ class Bubble {
     context.arc(x, y, this.radius, 0, 2 * Math.PI)
     context.fill()
   }
-  update(time, levelWidth, levelHeight) {
+  update(levelWidth, levelHeight) {
     const [x, y] = this.position
     if (x - this.radius <= 0 || x + this.radius >= levelWidth) {
       this.velocity[0] = -this.velocity[0]
     }
     if (y + this.radius >= levelHeight) {
       this.velocity[1] = this.bounceVelocity
+      console.log(this.velocity)
     } else {
-      this.velocity[1] += 0.05
+      this.velocity[1] += 0.05 + (1.5 / this.size) * gravityPresets.NORMAL
     }
     const [dx, dy] = this.velocity
-    this.position = [x + dx, y + dy + gravityPresets.NORMAL]
+    this.position = [x + dx, y + dy]
   }
 }
 
@@ -140,9 +141,9 @@ export default class BubbleLayer extends Layer {
     })
     super.draw(context)
   }
-  update(time) {
+  update() {
     this.bubbles.forEach(bubble => {
-      bubble.update(time, this.width, this.height)
+      bubble.update(this.width, this.height)
     })
   }
 }

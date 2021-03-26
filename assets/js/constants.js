@@ -8,8 +8,8 @@
  */
 
 const POSITION_EDGE_OFFSET = 40
-const VELOCITY_CONSTANT = 4.25
-const GRAVITY_CONSTANT = 10
+const VELOCITY_CONSTANT = 3.75
+const GRAVITY_CONSTANT = 0.5
 
 /**
  * @type Record<BubbleColor, string>

@@ -5,7 +5,7 @@
       "color": "YELLOW",
       "initialPosition": ["MIDLEFT", 800],
       "initialVelocity": "RIGHT",
-      "size": 2,
+      "size": 4,
       "splitTrajectories": "NORMAL"
     }
   ],
