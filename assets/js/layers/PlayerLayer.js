@@ -1,5 +1,10 @@
 import { clamp } from '../util.js'
 import Layer from './Layer.js'
+import { RopeArrow } from './Weapon.js'
+
+/**
+ * @typedef { import('./Weapon').Weapon } Weapon
+ */
 
 export class Player {
   constructor(levelWidth, levelHeight, minX = 0, maxX = levelWidth) {
@@ -9,12 +14,17 @@ export class Player {
     this.velocity = 0
     this.minX = minX
     this.maxX = maxX - this.width
+    /**
+     * @type {Weapon}
+     */
+    this.weapon = new RopeArrow(this.x + this.width / 2, levelHeight)
   }
   /**
    * @param {CanvasRenderingContext2D} context Contex to draw on
    */
   draw(context) {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+    this.weapon.draw(context)
     context.fillStyle = `goldenrod`
     context.fillRect(this.x, context.canvas.height - this.height, this.width, this.height)
   }
@@ -22,6 +32,7 @@ export class Player {
     if (this.velocity) {
       this.x = clamp(this.x + this.velocity, this.minX, this.maxX)
     }
+    this.weapon.update()
   }
 }
 

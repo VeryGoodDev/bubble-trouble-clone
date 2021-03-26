@@ -10,6 +10,7 @@ const PLAYER_VELOCITY = 5.75
  */
 export function setupKeyboard(player) {
   const pressedKeys = new Map()
+  window.player = player
   /**
    * @param {KeyboardEvent} evt
    */
@@ -22,7 +23,9 @@ export function setupKeyboard(player) {
       case `ArrowRight`:
         player.velocity = pressedKeys.has(`ArrowLeft`) ? -PLAYER_VELOCITY : PLAYER_VELOCITY
         break
-      // TODO: Fire weapon button
+      case `Space`:
+        player.weapon.fire(player.x + player.width / 2)
+        break
     }
   }
   /**
