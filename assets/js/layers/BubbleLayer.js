@@ -1,4 +1,5 @@
 import { gravityPresets, positionPresets, splitTypePresets, velocityPresets } from '../constants.js'
+import { clamp } from '../util.js'
 import Layer from './Layer.js'
 
 /**
@@ -8,6 +9,8 @@ import Layer from './Layer.js'
  * @typedef { import('../types').SplitTypeConstant } SplitTypeConstant
  * @typedef { import('../types').Velocity } Velocity
  */
+
+const BUBBLE_BOUNCE_CLEARANCE = 15
 
 // These functions are the "black box" that encapsulates a lot
 // of logic that is done to set up a bubble. Mostly looking up
@@ -67,6 +70,9 @@ function getRadius(bubbleSize, levelWidth) {
   const divisor = (1 / bubbleSize) ** (7 / 18) * 175
   return (levelWidth / divisor) * bubbleSize
 }
+function getBounceVelocity(bubbleSize, minBounce, maxBounce) {
+  return -clamp(bubbleSize * 1, minBounce, maxBounce)
+}
 
 class Bubble {
   /**
@@ -74,12 +80,16 @@ class Bubble {
    * @param {number} index Position of the bubble from the array in the level spec (used as the ID for the bubble)
    * @param {number} levelWidth Width of the level
    */
-  constructor(bubbleSpec, index, levelWidth) {
+  constructor(bubbleSpec, index, levelWidth, levelHeight) {
     // TODO: customBehavior
     this.id = index
     this.color = bubbleSpec.color
     this.size = bubbleSpec.size
-    this.bounceTime = null
+    this.bounceVelocity = getBounceVelocity(
+      this.size,
+      levelHeight - levelHeight / 9 - BUBBLE_BOUNCE_CLEARANCE,
+      BUBBLE_BOUNCE_CLEARANCE
+    )
     this.velocity = [getVelocity(bubbleSpec.initialVelocity), gravityPresets.NORMAL]
     this.splitTrajectories = getSplitTrajectories(bubbleSpec.splitTrajectories)
     this.radius = getRadius(this.size, levelWidth)
@@ -100,15 +110,13 @@ class Bubble {
     if (x - this.radius <= 0 || x + this.radius >= levelWidth) {
       this.velocity[0] = -this.velocity[0]
     }
-    if (!this.bounceTime && y + this.radius >= levelHeight) {
-      this.bounceTime = time
-      this.velocity[1] = -this.velocity[1]
-    } else if (this.bounceTime && time - this.bounceTime > 3000) {
-      this.bounceTime = null
-      this.velocity[1] = -this.velocity[1]
+    if (y + this.radius >= levelHeight) {
+      this.velocity[1] = this.bounceVelocity
+    } else {
+      this.velocity[1] += 0.05
     }
     const [dx, dy] = this.velocity
-    this.position = [x + dx, y + dy]
+    this.position = [x + dx, y + dy + gravityPresets.NORMAL]
   }
 }
 
@@ -120,7 +128,7 @@ export default class BubbleLayer extends Layer {
    */
   constructor(levelSpec, width, height) {
     super(width, height)
-    this.bubbles = levelSpec.bubbles.map((bubbleSpec, index) => new Bubble(bubbleSpec, index, width))
+    this.bubbles = levelSpec.bubbles.map((bubbleSpec, index) => new Bubble(bubbleSpec, index, width, height))
   }
   /**
    * @param {CanvasRenderingContext2D} context Context to draw on
